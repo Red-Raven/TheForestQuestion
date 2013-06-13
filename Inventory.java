@@ -3,7 +3,7 @@ package game;
 import java.util.ArrayList;
 
 public class Inventory {
-  private ArrayList<Weapon> myInventoryWeapons;
+	private ArrayList<Weapon> myInventoryWeapons;
 	private ArrayList<Armor> myInventoryArmor;
 	private ArrayList<Potion> myInventoryPotions;
 	private Weapon[] myActiveWeapons;
@@ -14,6 +14,8 @@ public class Inventory {
 		myInventoryArmor = inventoryArmor;
 		myInventoryPotions = inventoryPotions;
 	}
+	
+	//implement armor slots
 	
 	public ArrayList<Weapon> getIntventoryWeapons()
 	{
@@ -49,4 +51,15 @@ public class Inventory {
 	{
 		return myActiveArmor[index];
 	}
+	
+	public int getTotalArmorStrength()
+	{
+		int totalStrength = 0;
+		for (Armor currentArmor : myActiveArmor)
+		{
+			totalStrength += currentArmor.getStrength();
+		}
+		return totalStrength;
+	}
 }
+
