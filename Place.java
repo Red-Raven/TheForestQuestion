@@ -3,6 +3,7 @@ package game;
 public class Place {
 
 	private String myName;
+	private boolean myIsAccessible;
 	private int myLength;
 	private int myWidth;
 	private int myXPosition;
@@ -15,14 +16,16 @@ public class Place {
 	private int myWestEntranceY;
 	private int myNorthEntranceX;
 	private int myNorthEntranceY;
-	private Object[][] myGrid;
-	
-	public Place(String name, int length, int width, int xPosition, int yPosition, int eastEntranceX, int eastEntranceY, int southEntranceX, int southEntranceY, int westEntranceX, int westEntranceY, int northEntranceX, int northEntranceY)
+	private Entity[][] myGrid;
+	private String[] myDescriptions;
+
+	public Place(String name, boolean isAccessible, int length, int width, int xPosition, int yPosition, int eastEntranceX, int eastEntranceY, int southEntranceX, int southEntranceY, int westEntranceX, int westEntranceY, int northEntranceX, int northEntranceY, String[] descriptions)
 	{
 		myName = name;
+		myIsAccessible = isAccessible;
 		myLength = length;
 		myWidth = width;
-		myGrid = new Object[myLength][myWidth];
+		myGrid = new Entity[myLength][myWidth];
 		myXPosition = xPosition;
 		myYPosition = yPosition;
 		myEastEntranceX = eastEntranceX;
@@ -33,27 +36,48 @@ public class Place {
 		myWestEntranceY = westEntranceY;
 		myNorthEntranceX = northEntranceX;
 		myNorthEntranceY = northEntranceY;
+		myDescriptions = descriptions;
 	}
-	
+
 	public Object getGridObject(int x, int y)
-	{
-		return myGrid[x][y];
-	}
-	
+	{return myGrid[x][y];}
+
 	public String getName()
-	{
-		return myName;
-	}
-	//add descriptions
+	{return myName;}
+
+	public String getDescription(String subject)
+	{if (subject.equals("look"))
+		{return myDescriptions[0];}
+
+	else if (subject.equals("look detail"))
+		{return myDescriptions[1];}
+
+	else if (subject.equals("East"))
+		{return myDescriptions[2];}
+
+	else if (subject.equals("South"))
+		{return myDescriptions[3];}
+
+	else if (subject.equals("West"))
+		{return myDescriptions[4];}
+
+	else if (subject.equals("North"))
+		{return myDescriptions[5];}
+
+	else
+		{return null;}}
+
+	public boolean getIsAccessible()
+	{return myIsAccessible;}
 
 	public int getX()
-	{
-		return myXPosition;
-	}
-	
+	{return myXPosition;}
+
 	public int getY()
-	{
-		return myYPosition;
-	}
+	{return myYPosition;}
+
+	public double getDistance(Entity entity1, Entity entity2)
+	{return (Math.sqrt(Math.pow(entity1.getEntityPoint().getX() - entity2.getEntityPoint().getX(), 2) + 
+			Math.pow(entity1.getEntityPoint().getY() - entity2.getEntityPoint().getY(), 2)));}
 }
 
